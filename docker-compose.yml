@@ -1,0 +1,29 @@
+services:
+  mongo_base:
+    image: mongo:latest
+    ports:
+      - '3001:27017'
+    volumes:
+      - dbdata:/data/db
+
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: development
+
+    environment:
+      - MONGO_URI= "mongodb://mongo_base:27017/"
+
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo_base
+
+volumes:
+  dbdata:
+
+
