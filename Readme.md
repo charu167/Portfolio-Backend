@@ -10,8 +10,12 @@ Feel free to use it for all kinds of different NdeJS applications!
 
 **Installation:**
 
-Clone this repo and run following commands:
+Clone this repo: `git clone https://github.com/charu167/node-template.git`
 
-For first time: `docker-compose up --build`
+Remove the remote repository: `git remote remove origin`
+
+Add your own remote repository: `git remote add origin https;//github.com/<your-github>/<your-repository>`
+
+Run project for the first time: `docker-compose up --build`
 
 For all other times: `docker-compose up`
