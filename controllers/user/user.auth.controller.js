@@ -31,11 +31,17 @@ async function signin(req, res) {
     const password = req.body.password;
 
     const user = await User.findOne({ email: email });
-    const isMatch = bcrypt.compare(password, user.password);
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
     if (user) {
       if (isMatch) {
+        const token = await jwt.sign(
+          { email, password },
+          process.env.jwtPassword
+        );
         res.status(200).json({
-          token: jwt.sign({ email, password }, process.env.jwtPassword),
+          token: token,
         });
       } else {
         res.status(400).json({ error: "Password doesn't match" });
